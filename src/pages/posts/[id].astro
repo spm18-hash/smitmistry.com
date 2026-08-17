@@ -1,0 +1,78 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Date from "../../components/Date.astro";
+
+export const getStaticPaths = (async () => {
+    const posts = await getCollection("blog");
+
+    return posts.map((post) => ({
+        params: { id: post.id },
+        props: { post },
+    }));
+}) satisfies GetStaticPaths;
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout
+    title={post.data.title}
+    image={{ src: `/og/${post.id}.png`, alt: `${post.data.title}` }}
+>
+    <article>
+        <div class="pub-date">
+            <span>Published at: <Date date={post.data.pubDate} /></span>
+        </div>
+        <h1>{post.data.title}</h1>
+        <Content />
+    </article>
+</Layout>
+
+<style>
+    article {
+        .pub-date {
+            font-size: 0.85rem;
+            display: inline-block;
+            color: var(--muted);
+            margin-top: 2em;
+
+            & time {
+                font-size: inherit;
+            }
+        }
+        pre {
+            scrollbar-width: none;
+            padding: 1rem;
+            border: 1px solid var(--border);
+
+            & code {
+                font-size: 0.85rem;
+            }
+        }
+
+        & h1 {
+            font-size: 2.125em;
+            line-height: 1;
+        }
+
+        & :where(h1, h2, h3, h4, h5, h6) {
+            text-wrap: balance;
+            text-decoration: underline;
+        }
+
+        & hr {
+            margin-block: 2em;
+            border: none;
+            height: 1px;
+            background-color: hsl(0 0 25);
+        }
+
+        & p {
+            text-wrap: pretty;
+            line-height: 1.35;
+            color: var(--foreground);
+        }
+    }
+</style>

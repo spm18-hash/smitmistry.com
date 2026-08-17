@@ -1,0 +1,71 @@
+---
+import { Font } from "astro:assets";
+import siteInfo from "../data/site-info";
+import Favicon from "./Favicon.astro";
+import SEO from "./SEO.astro";
+
+export type Props = {
+    title?: string;
+    rawTitle?: string;
+    description?: string;
+    image?: { src: string; alt: string };
+    canonicalURL?: URL | null;
+    pageType?: "website" | "article";
+};
+
+const twitterHandle = "astrodotbuild";
+
+const {
+    rawTitle,
+    description = siteInfo.description,
+    image = siteInfo.image,
+    canonicalURL = new URL(Astro.request.url, Astro.site),
+    pageType = "website",
+} = Astro.props;
+
+const title =
+    rawTitle ?? [Astro.props.title, siteInfo.name].filter(Boolean).join(" | ");
+const resolvedImage = {
+    src: new URL(image.src, Astro.site).toString(),
+    alt: image.alt,
+};
+---
+
+<!-- High Priority Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
+
+<Font cssVariable="--font-sans" preload />
+<Font cssVariable="--font-mono" />
+
+
+<!-- Low Priority Global Metadata -->
+<Favicon />
+<link rel="mask-icon" href="/favicon.svg" color="#8D46E7" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS" />
+
+<SEO
+    name={siteInfo.name}
+    title={title}
+    description={description}
+    image={resolvedImage}
+    twitter={{ handle: twitterHandle }}
+    og={{ type: pageType }}
+    canonicalURL={canonicalURL}
+/>
+
+<script is:inline>
+    (function () {
+        const theme = localStorage.getItem("theme") || "system";
+        const isDark =
+            theme === "dark" ||
+            (theme === "system" &&
+                window.matchMedia("(prefers-color-scheme: dark").matches);
+
+        document.documentElement.setAttribute("data-theme", theme);
+        document.documentElement.classList.toggle("dark", isDark);
+        document.documentElement.style.colorScheme = isDark ? "dark" : "light";
+    })();
+</script>

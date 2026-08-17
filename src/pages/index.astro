@@ -1,17 +1,56 @@
 ---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import Date from "../components/Date.astro";
+const posts = await getCollection("blog");
 
+export const ogMeta = {
+    title: "Your Site Name",
+    description: "Your tagline here",
+};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title={"Home"}>
+    <ul>
+        {
+            posts.map((post) => (
+                <li>
+                    <a href={`/posts/${post.id}`}>{post.data.title}</a>
+                    <Date date={post.data.pubDate} />
+                </li>
+            ))
+        }
+    </ul>
+</Layout>
+
+<style>
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        list-style: none;
+    }
+
+    li {
+        &:before {
+            content: "#";
+            position: absolute;
+            left: 0;
+        }
+
+        position: relative;
+        padding-left: 1.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 0.625rem;
+
+        & a {
+            font-size: 1.025rem;
+            text-wrap: pretty;
+            font-weight: 500;
+            display: inline-block;
+            text-decoration: underline;
+        }
+    }
+</style>

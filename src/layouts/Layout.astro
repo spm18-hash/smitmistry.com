@@ -1,0 +1,133 @@
+---
+import Header from "../components/Header.astro";
+import BaseHead, {
+    type Props as HeadProps,
+} from "../components/BaseHead.astro";
+import ThemeSwitcher from "../components/ThemeSwitcher.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props extends HeadProps {
+    class?: string;
+}
+
+const { ...head } = Astro.props;
+---
+
+<html lang="en" class:list={[Astro.props.class]}>
+    <head>
+        <BaseHead {...head} />
+    </head>
+    <body>
+        <Header />
+        <slot />
+        <Footer />
+    </body>
+</html>
+
+<style is:global>
+    :root,
+    [data-theme="light"] {
+        --background: hsl(39 38 98);
+        --foreground: hsl(240 6 10);
+        --muted: hsl(0 0 50);
+        --border: hsl(240 6 90);
+        --color-link: hsl(153 49 20);
+        --card: hsl(240 5 96);
+
+        .astro-code,
+        .astro-code span {
+            background-color: var(--background) !important;
+        }
+    }
+    [data-theme="dark"] {
+        --background: hsl(34 21 6);
+        --foreground: hsl(39 38 98);
+        --muted: hsl(0 0 70);
+        --border: hsl(240 4 16);
+        --color-link: hsl(150 30 52);
+        --card: hsl(240 6 10);
+
+        .astro-code,
+        .astro-code span {
+            color: var(--shiki-dark) !important;
+            background-color: var(--background) !important;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        [data-theme="system"] {
+            --background: hsl(39 38 98);
+            --foreground: hsl(240 6 10);
+            --muted: hsl(0 0 50);
+            --border: hsl(240 6 90);
+            --color-link: hsl(153 49 20);
+            --card: hsl(240 5 96);
+        }
+
+        .astro-code,
+        .astro-code span {
+            background-color: var(--background) !important;
+        }
+    }
+    @media (prefers-color-scheme: dark) {
+        [data-theme="system"] {
+            --background: hsl(34 21 6);
+            --foreground: hsl(39 38 98);
+            --muted: hsl(0 0 70);
+            --border: hsl(240 4 16);
+            --color-link: hsl(150 30 52);
+            --card: hsl(240 6 10);
+        }
+
+        .astro-code,
+        .astro-code span {
+            color: var(--shiki-dark) !important;
+            background-color: var(--background) !important;
+        }
+    }
+
+    * {
+        font-weight: unset;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    button {
+        all: unset;
+        cursor: pointer;
+    }
+    html {
+        font-family: var(--font-sans);
+    }
+
+    code,
+    pre {
+        font-family: var(--font-mono);
+    }
+
+    a {
+        color: var(--color-link);
+        text-decoration: none;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        letter-spacing: -0.025em;
+        font-weight: 500;
+    }
+</style>
+
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        max-width: 70ch;
+        margin-inline: auto;
+        padding-inline: 20px;
+        background-color: var(--background);
+        color: var(--foreground);
+    }
+</style>

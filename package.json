@@ -6,12 +6,18 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --port 3000 --host",
     "build": "astro build",
-    "preview": "astro preview",
+    "preview": "astro preview --port 3000",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^7.1.6"
+    "astro": "^7.2.2",
+    "satori": "^0.29.0",
+    "sharp": "^0.35.3"
+  },
+  "packageManager": "pnpm@11.22.0",
+  "devDependencies": {
+    "@types/node": "^26.2.0"
   }
 }
