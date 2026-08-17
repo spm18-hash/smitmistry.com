@@ -43,8 +43,8 @@ jobs:
 
       - name: Deploy to S3
         run: aws s3 sync dist/ s3://smitmistry.com-867633231794-ap-south-1-an \
-          --region ap-south-1 \
-          --delete
+          --delete \
+          --region ap-south-1
 
       - name: Invalidate CloudFront
         run: |
