@@ -39,10 +39,12 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v5
         with:
           role-to-assume: arn:aws:iam::867633231794:role/GitHubActions-smitmistry-com
-          aws-region: ap-south-1
+          aws-region: us-east-1
 
       - name: Deploy to S3
-        run: aws s3 sync dist/ s3://smitmistry.com-867633231794-ap-south-1-an --delete
+        run: aws s3 sync dist/ s3://smitmistry.com-867633231794-ap-south-1-an \
+          --region ap-south-1
+          --delete
 
       - name: Invalidate CloudFront
         run: |
