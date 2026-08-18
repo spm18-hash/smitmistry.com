@@ -1,13 +1,15 @@
 // @ts-check
 import { defineConfig, fontProviders } from "astro/config";
+import { satteri } from "@astrojs/markdown-satteri";
+
+import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
   experimental: {
     incrementalBuild: true,
   },
-  site: process.env.PUBLIC_SITE_URL ?? "https://smitmistry.com",
 
-  prefetch: true,
+  site: "https://smitmistry.com",
 
   fonts: [
     {
@@ -34,8 +36,11 @@ export default defineConfig({
   ],
 
   markdown: {
+    processor: satteri(),
     shikiConfig: {
       themes: { dark: "github-dark", light: "github-light" },
     },
   },
+
+  integrations: [sitemap()],
 });
