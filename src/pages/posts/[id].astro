@@ -54,25 +54,73 @@ const { Content } = await render(post);
 
         & h1 {
             font-size: 2.125em;
-            line-height: 1;
+            line-height: 1.125;
+            margin-bottom: 3rem;
+            text-wrap: balance;
         }
 
-        & :where(h1, h2, h3, h4, h5, h6) {
-            text-wrap: balance;
+        & :where(h2, h3, h4, h5, h6) {
+            text-wrap: pretty;
+        }
+
+        & :where(h1, h2) {
             text-decoration: underline;
+            font-weight: 600;
         }
 
         & hr {
             margin-block: 2em;
             border: none;
             height: 1px;
-            background-color: hsl(0 0 25);
+            background-color: color-mix(
+                in oklab,
+                var(--muted) 30%,
+                transparent 60%
+            );
+        }
+
+        & strong {
+            font-weight: 600;
         }
 
         & p {
             text-wrap: pretty;
             line-height: 1.35;
             color: var(--foreground);
+        }
+
+        & blockquote {
+            border-left: 1px solid var(--muted);
+            margin-inline-start: 0;
+            padding-inline-start: 1em;
+        }
+
+        & ul {
+            margin-left: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.65em;
+            margin-block-end: 1.5em;
+        }
+
+        & :not(pre) code {
+            font-size: 0.875rem;
+            background-color: color-mix(
+                in oklab,
+                var(--muted) 30%,
+                transparent 90%
+            );
+
+            @media (prefers-color-scheme: dark) {
+                background-color: color-mix(
+                    in oklab,
+                    var(--muted) 12%,
+                    transparent 90%
+                );
+            }
+
+            padding: 0.1em 0.25em;
+            border-radius: 4px;
         }
     }
 </style>

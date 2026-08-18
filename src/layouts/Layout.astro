@@ -3,7 +3,6 @@ import Header from "../components/Header.astro";
 import BaseHead, {
     type Props as HeadProps,
 } from "../components/BaseHead.astro";
-import ThemeSwitcher from "../components/ThemeSwitcher.astro";
 import Footer from "../components/Footer.astro";
 
 interface Props extends HeadProps {
@@ -27,7 +26,7 @@ const { ...head } = Astro.props;
 <style is:global>
     :root,
     [data-theme="light"] {
-        --background: hsl(39 38 98);
+        --background: hsl(0 0 98);
         --foreground: hsl(240 6 10);
         --muted: hsl(0 0 50);
         --border: hsl(240 6 90);
@@ -40,8 +39,8 @@ const { ...head } = Astro.props;
         }
     }
     [data-theme="dark"] {
-        --background: hsl(34 21 6);
-        --foreground: hsl(39 38 98);
+        --background: hsl(0 0 4);
+        --foreground: hsl(0 0 98);
         --muted: hsl(0 0 70);
         --border: hsl(240 4 16);
         --color-link: hsl(150 30 52);
@@ -56,7 +55,7 @@ const { ...head } = Astro.props;
 
     @media (prefers-color-scheme: light) {
         [data-theme="system"] {
-            --background: hsl(39 38 98);
+            --background: hsl(0 0 98);
             --foreground: hsl(240 6 10);
             --muted: hsl(0 0 50);
             --border: hsl(240 6 90);
@@ -71,8 +70,8 @@ const { ...head } = Astro.props;
     }
     @media (prefers-color-scheme: dark) {
         [data-theme="system"] {
-            --background: hsl(34 21 6);
-            --foreground: hsl(39 38 98);
+            --background: hsl(0 0 4);
+            --foreground: hsl(0 0 98);
             --muted: hsl(0 0 70);
             --border: hsl(240 4 16);
             --color-link: hsl(150 30 52);
