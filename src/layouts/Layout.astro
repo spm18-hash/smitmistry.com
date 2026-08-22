@@ -28,9 +28,10 @@ const { ...head } = Astro.props;
         --color-bg: oklch(98.5% 0 none) /* neutral-50 */;
         --color-fg: oklch(20.5% 0 none) /* neutral-900 */;
         --color-muted: oklch(43.9% 0 none) /* neutral-600 */;
-        --color-border: oklch(92.2% 0 none) /* neutral-300 */;
-        --color-link: oklch(35.06% 0.2216 269.1) /* google link */;
-        --color-visited-link: oklch(39.95% 0.2044 307.9);
+        --color-code-bg: oklch(90% 0 none) /* neutral-200 */;
+        --color-border: oklch(92.2% 0 none) /* neutral-100 */;
+        --color-link: oklch(35.06% 0.2216 269.1) /* blue-700 */;
+        --color-link-visited: oklch(39.95% 0.2044 307.9) /* purple-700 */;
 
         .astro-code,
         .astro-code span {
@@ -61,7 +62,7 @@ const { ...head } = Astro.props;
         text-decoration: none;
 
         &:visited {
-            color: var(--color-visited-link);
+            color: var(--color-link-visited);
         }
     }
 

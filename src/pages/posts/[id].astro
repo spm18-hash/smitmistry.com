@@ -101,11 +101,7 @@ const { Content } = await render(post);
 
         & :not(pre) code {
             font-size: 0.875rem;
-            background-color: var(--color-muted);
-
-            @media (prefers-color-scheme: dark) {
-                background-color: var(--color-muted);
-            }
+            background-color: var(--color-code-bg);
 
             padding: 0.1em 0.25em;
             border-radius: 4px;
