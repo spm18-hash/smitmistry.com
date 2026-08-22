@@ -24,64 +24,17 @@ const { ...head } = Astro.props;
 </html>
 
 <style is:global>
-    :root,
-    [data-theme="light"] {
-        --background: hsl(0 0 98);
-        --foreground: hsl(240 6 10);
-        --muted: hsl(0 0 50);
-        --border: hsl(240 6 90);
-        --color-link: hsl(153 49 20);
-        --card: hsl(240 5 96);
+    :root {
+        --color-bg: oklch(98.5% 0 none) /* neutral-50 */;
+        --color-fg: oklch(20.5% 0 none) /* neutral-900 */;
+        --color-muted: oklch(43.9% 0 none) /* neutral-600 */;
+        --color-border: oklch(92.2% 0 none) /* neutral-300 */;
+        --color-link: oklch(35.06% 0.2216 269.1) /* google link */;
+        --color-visited-link: oklch(39.95% 0.2044 307.9);
 
         .astro-code,
         .astro-code span {
-            background-color: var(--background) !important;
-        }
-    }
-    [data-theme="dark"] {
-        --background: hsl(0 0 4);
-        --foreground: hsl(0 0 98);
-        --muted: hsl(0 0 70);
-        --border: hsl(240 4 16);
-        --color-link: hsl(150 30 52);
-        --card: hsl(240 6 10);
-
-        .astro-code,
-        .astro-code span {
-            color: var(--shiki-dark) !important;
-            background-color: var(--background) !important;
-        }
-    }
-
-    @media (prefers-color-scheme: light) {
-        [data-theme="system"] {
-            --background: hsl(0 0 98);
-            --foreground: hsl(240 6 10);
-            --muted: hsl(0 0 50);
-            --border: hsl(240 6 90);
-            --color-link: hsl(153 49 20);
-            --card: hsl(240 5 96);
-        }
-
-        .astro-code,
-        .astro-code span {
-            background-color: var(--background) !important;
-        }
-    }
-    @media (prefers-color-scheme: dark) {
-        [data-theme="system"] {
-            --background: hsl(0 0 4);
-            --foreground: hsl(0 0 98);
-            --muted: hsl(0 0 70);
-            --border: hsl(240 4 16);
-            --color-link: hsl(150 30 52);
-            --card: hsl(240 6 10);
-        }
-
-        .astro-code,
-        .astro-code span {
-            color: var(--shiki-dark) !important;
-            background-color: var(--background) !important;
+            background-color: var(--color-bg) !important;
         }
     }
 
@@ -106,6 +59,10 @@ const { ...head } = Astro.props;
     a {
         color: var(--color-link);
         text-decoration: none;
+
+        &:visited {
+            color: var(--color-visited-link);
+        }
     }
 
     h1,
@@ -126,7 +83,7 @@ const { ...head } = Astro.props;
         max-width: 70ch;
         margin-inline: auto;
         padding-inline: 20px;
-        background-color: var(--background);
+        background-color: var(--color-bg);
         color: var(--foreground);
     }
 </style>

@@ -1,10 +1,5 @@
----
-import ThemeSwitcher from "./ThemeSwitcher.astro";
----
-
 <footer>
     <a href="/" class="title">smitmistry.com</a>
-    <ThemeSwitcher />
 </footer>
 
 <style>
@@ -21,60 +16,3 @@ import ThemeSwitcher from "./ThemeSwitcher.astro";
         justify-content: space-between;
     }
 </style>
-
-<script>
-    type Theme = "light" | "dark" | "system";
-    const THEME_KEY = "theme";
-
-    function getSystemTheme() {
-        return window.matchMedia("(prefers-color-scheme: dark)").matches
-            ? "dark"
-            : "light";
-    }
-
-    function applyTheme(theme: Theme) {
-        const resolved = theme === "system" ? getSystemTheme() : theme;
-
-        document.documentElement.setAttribute("data-theme", theme);
-        document.documentElement.classList.toggle("dark", resolved === "dark");
-        document.documentElement.style.colorScheme = resolved;
-
-        updateActiveButton(theme);
-    }
-
-    function setTheme(theme: Theme) {
-        localStorage.setItem(THEME_KEY, theme);
-        applyTheme(theme);
-    }
-
-    function updateActiveButton(theme: Theme) {
-        document
-            .querySelectorAll<HTMLButtonElement>(".theme-btn")
-            .forEach((btn) => {
-                const isActive = btn.dataset.theme === theme;
-                btn.classList.toggle("active", isActive);
-                btn.setAttribute("aria-pressed", String(isActive));
-            });
-    }
-
-    // Initialize
-    const saved = (localStorage.getItem(THEME_KEY) as Theme) || "system";
-    updateActiveButton(saved);
-
-    // Click handling
-    document.getElementById("theme-control")?.addEventListener("click", (e) => {
-        const btn = (e.target as HTMLElement).closest(".theme-btn");
-        if (btn && btn instanceof HTMLButtonElement && btn.dataset.theme) {
-            setTheme(btn.dataset.theme as Theme);
-        }
-    });
-
-    // React to system theme changes when set to "system"
-    window
-        .matchMedia("(prefers-color-scheme: dark)")
-        .addEventListener("change", () => {
-            if ((localStorage.getItem(THEME_KEY) || "system") === "system") {
-                applyTheme("system");
-            }
-        });
-</script>
