@@ -72,11 +72,7 @@ const { Content } = await render(post);
             margin-block: 2em;
             border: none;
             height: 1px;
-            background-color: color-mix(
-                in oklab,
-                var(--muted) 30%,
-                transparent 60%
-            );
+            background-color: var(--color-muted);
         }
 
         & strong {
@@ -105,18 +101,10 @@ const { Content } = await render(post);
 
         & :not(pre) code {
             font-size: 0.875rem;
-            background-color: color-mix(
-                in oklab,
-                var(--muted) 30%,
-                transparent 90%
-            );
+            background-color: var(--color-muted);
 
             @media (prefers-color-scheme: dark) {
-                background-color: color-mix(
-                    in oklab,
-                    var(--muted) 12%,
-                    transparent 90%
-                );
+                background-color: var(--color-muted);
             }
 
             padding: 0.1em 0.25em;
