@@ -1,9 +1,15 @@
+---
+import Social from "./Social.astro";
+---
+
 <header>
     <nav>
-        <a href="/">{"[ Home ]"}</a>
-        <a href="/">{"[ Blog ]"}</a>
-        <a href="/">{"[ Work ]"}</a>
+        <a href="/">{"Home"}</a>
+        <a href="/">{"Blog"}</a>
+        <a href="/">{"Work"}</a>
     </nav>
+
+    <Social />
 </header>
 
 <style>
@@ -17,7 +23,7 @@
         & nav {
             display: flex;
             align-items: center;
-            gap: 1.25rem;
+            gap: 1rem;
         }
 
         & a:hover {

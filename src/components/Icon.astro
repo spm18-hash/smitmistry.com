@@ -1,19 +1,20 @@
 ---
 interface Props {
     title: string;
-    class?: string;
+    size?: string;
 }
 
-const { title, class: className } = Astro.props;
+const { title, size = "1em" } = Astro.props;
 ---
 
-<svg xmlns="http://www.w3.org/2000/svg" class={className}>
+<svg xmlns="http://www.w3.org/2000/svg">
     <use href={`/sprite.svg#${title}`}></use>
 </svg>
 
-<style>
+<style define:vars={{ "icon-size": size }}>
     svg {
-        width: 24px;
-        height: 24px;
+        font-size: var(--icon-size, 1em);
+        width: 1em;
+        height: 1em;
     }
 </style>
