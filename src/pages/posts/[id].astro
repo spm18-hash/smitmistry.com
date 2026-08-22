@@ -22,10 +22,10 @@ const { Content } = await render(post);
     image={{ src: `/og/${post.id}.png`, alt: `${post.data.title}` }}
 >
     <article>
+        <h1>{post.data.title}</h1>
         <div class="pub-date">
             <span>Published at: <Date date={post.data.pubDate} /></span>
         </div>
-        <h1>{post.data.title}</h1>
         <Content />
     </article>
 </Layout>
@@ -36,7 +36,7 @@ const { Content } = await render(post);
             font-size: 0.85rem;
             display: inline-block;
             color: var(--color-muted);
-            margin-top: 2em;
+            margin-bottom: 2em;
 
             & time {
                 font-size: inherit;
@@ -55,7 +55,7 @@ const { Content } = await render(post);
         & h1 {
             font-size: 2.125em;
             line-height: 1.125;
-            margin-bottom: 3rem;
+            margin-top: 3rem;
             text-wrap: balance;
         }
 
